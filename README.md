@@ -1,5 +1,5 @@
 # SpringCache
-学习使用SpringCache的Demo项目。涉及Ehcache2.x、Ehcache3.x、Redis 
+学习使用SpringCache的Demo项目。涉及Ehcache2.x、Ehcache3.x、Redis
 
 ## 在Spring Boot中通过@EnableCaching注解自动化配置合适的缓存管理器（CacheManager），Spring Boot根据下面的顺序去侦测缓存提供者：
 * Generic
@@ -15,7 +15,7 @@
 ```
 @Component
 @CacheConfig(cacheNames = "UserCache")
-public class UserCache **implements Serializable** {
+public class UserCache implements Serializable {
     @CachePut(key = "#loginId")
 //    @CachePut(key = "#p0") 第一个参数作为key， 与 key = "#loginId" 等同
     public UserDO put(String loginId){
