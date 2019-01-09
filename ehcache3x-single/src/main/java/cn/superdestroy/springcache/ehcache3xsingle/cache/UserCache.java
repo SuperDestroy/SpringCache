@@ -1,10 +1,12 @@
-package cn.superdestroy.springcache.ehcache2xsingle.cache;
+package cn.superdestroy.springcache.ehcache3xsingle.cache;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
 
 /**
  * 2019-01-09 17:21
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @CacheConfig(cacheNames = "UserCache")
-public class UserCache {
+public class UserCache implements Serializable {
     @CachePut(key = "#loginId")
 //    @CachePut(key = "#p0") 第一个参数作为key， 与 key = "#loginId" 等同
     public UserDO put(String loginId){

@@ -1,5 +1,6 @@
 package cn.superdestroy.springcache.ehcache2xsingle.config;
 
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +14,12 @@ import org.springframework.core.io.ClassPathResource;
 //@Configurable
 public class ConfigEhcache {
 
-    @Bean
+//    @Bean
     public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean bean){
         return new EhCacheCacheManager(bean.getObject());
     }
 
-    @Bean
+//    @Bean
     public EhCacheManagerFactoryBean ehCacheManagerFactoryBean(){
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
         ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
