@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" dynamicConfig="false">
+    <!--磁盘文件存储位置 Demo主要使用内存方式 该配置可以注释-->
+    <diskStore path="java.io.tmpdir"/>
+    <!--
+        maxElementsInMemory 最大缓存对象数量
+        timeToIdleSeconds 缓存对象失效的空闲时间
+        timeToLiveSeconds从 缓存对象放置至缓存中到失效的存活时间。
+        memoryStoreEvictionPolicy 失效算法
+    -->
+    <cache name="UserCache"
+           eternal="false"
+           maxElementsInMemory="100000"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1"
+           memoryStoreEvictionPolicy="LFU">
+    </cache>
+</ehcache>
