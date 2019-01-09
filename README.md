@@ -11,7 +11,7 @@
 * Guava
 * Simple
 
-**在配置使用Ehcache3.x采用SpringCache的注解，比较奇怪的是必须要在对象实现 Serializable 接口，不然会报错囧 暂时没有找到问题或者原因。带后期查看**
+### 在配置使用Ehcache3.x采用SpringCache的注解，比较奇怪的是必须要在对象实现 Serializable 接口，不然会报错囧 暂时没有找到问题或者原因。待后期查看
 ```
 @Component
 @CacheConfig(cacheNames = "UserCache")
