@@ -1,19 +1,20 @@
-SpringCache
-
+# SpringCache
 学习使用SpringCache的Demo项目。涉及Ehcache2.x、Ehcache3.x、Redis
 
-在Spring Boot中通过@EnableCaching注解自动化配置合适的缓存管理器（CacheManager），Spring Boot根据下面的顺序去侦测缓存提供者：
-Generic
-JCache (JSR-107) 推测在使用Ehcache3.x时（@EnableCaching）需要采用JCache的配置方式
-EhCache 2.x
-Hazelcast
-Infinispan
-Redis
-Guava
-Simple
-由于采用SpringBoot一定要注意SpringBoot的默认设置事项，避免个人设置出现无效的情况
+## 在Spring Boot中通过@EnableCaching注解自动化配置合适的缓存管理器（CacheManager），Spring Boot根据下面的顺序去侦测缓存提供者：
+* Generic
+* JCache (JSR-107) 推测在使用Ehcache3.x时（@EnableCaching）需要采用JCache的配置方式
+* EhCache 2.x
+* Hazelcast
+* Infinispan
+* Redis
+* Guava
+* Simple  
 
-在配置使用Ehcache3.x采用SpringCache的注解，比较奇怪的是必须要在对象实现 Serializable 接口，不然会报错囧 暂时没有找到问题或者原因。待后期查看
+*由于采用SpringBoot一定要注意SpringBoot的默认设置事项，避免个人设置出现无效的情况*  
+
+### 在配置使用Ehcache3.x采用SpringCache的注解，比较奇怪的是必须要在对象实现 Serializable 接口，不然会报错囧 暂时没有找到问题或者原因。待后期查看
+```
 @Component
 @CacheConfig(cacheNames = "UserCache")
 public class UserCache implements Serializable {
@@ -28,7 +29,7 @@ public class UserCache implements Serializable {
             }
         };
     }
- 
+
     /**
      * 失效某个对象
      * @param loginId
@@ -36,14 +37,14 @@ public class UserCache implements Serializable {
     @CacheEvict(key = "#loginId")
     public void evict(String loginId){
     }
- 
+
     /**
      * 失效所有对象
      */
     @CacheEvict(allEntries = true)
     public void evictAll(){
     }
- 
+
     /**
      * 从缓存中获取
      * @param loginId
@@ -61,9 +62,10 @@ public class UserCache implements Serializable {
         };
     }
 }
-Redis 使用注意事项（采用的版本SrpingBoot2.x,Redis5.x）
-如何不同的缓存设置不同的过期时间例子如下
-
+```
+## Redis 使用注意事项（采用的版本SrpingBoot2.x,Redis5.x）
+*如何不同的缓存设置不同的过期时间例子如下*
+```
 @Bean
 public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory){
     RedisCacheManager redisCacheManager = new RedisCacheManager(
@@ -77,8 +79,9 @@ public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFact
     );
     return redisCacheManager;
 }
-设置RedisCacheConfiguration使用链式操作要注意事项例子如下
-
+```
+*设置RedisCacheConfiguration使用链式操作要注意事项例子如下*
+```
 private RedisCacheConfiguration getRedisCacheConfigurationWidthTTL(Duration duration){
     RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
     /**
@@ -97,4 +100,4 @@ private RedisCacheConfiguration getRedisCacheConfigurationWidthTTL(Duration dura
             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(this.jackson2JsonRedisSerializer()))
             .entryTtl(duration);
 }
-``
+```
