@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/ehcache2x-single/pom.xml" />
         <option value="$PROJECT_DIR$/ehcache3x-single/pom.xml" />
+        <option value="$PROJECT_DIR$/redis5x-single/pom.xml" />
       </list>
     </option>
   </component>

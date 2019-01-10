@@ -1,9 +1,8 @@
 package cn.superdestroy.springcache.ehcache2xsingle.config;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 /**
@@ -11,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
  * 通过编程方式配置Cache管理 使用时候需要注释 application.properties 中的  spring.cache.ehcache.config
  * @author zhangningwei
  */
-//@Configurable
+@Configuration
 public class ConfigEhcache {
 
 //    @Bean
