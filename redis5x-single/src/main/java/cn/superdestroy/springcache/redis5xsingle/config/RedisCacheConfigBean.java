@@ -21,7 +21,7 @@ import java.util.HashMap;
  * 通过配置RedisTemple RedisCacheManage实现自定义序列化及定义失效时间问题
  * @author zhangningwei
  */
-//@Configuration
+@Configuration
 public class RedisCacheConfigBean {
 
     /**
