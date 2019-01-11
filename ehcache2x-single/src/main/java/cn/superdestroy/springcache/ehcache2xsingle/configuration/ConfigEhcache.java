@@ -1,4 +1,4 @@
-package cn.superdestroy.springcache.ehcache2xsingle.config;
+package cn.superdestroy.springcache.ehcache2xsingle.configuration;
 
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
