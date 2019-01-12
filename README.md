@@ -101,3 +101,21 @@ private RedisCacheConfiguration getRedisCacheConfigurationWidthTTL(Duration dura
             .entryTtl(duration);
 }
 ```
+#### 使用Lettuce作为RedisConnectionPool池 ####
+* 修改配置为  
+\# 连接池最大连接数（使用负值表示没有限制）  
+spring.redis.lettuce.pool.max-active=8  
+\# 连接池最大阻塞等待时间（使用负值表示没有限制）  
+spring.redis.lettuce.pool.max-wait=-1  
+\# 连接池中的最大空闲连接  
+spring.redis.lettuce.pool.max-idle=8  
+\# 连接池中的最小空闲连接  
+spring.redis.lettuce.pool.min-idle=0  
+* 需要加入common-pool2  
+```
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-pool2</artifactId>
+    <version>2.6.0</version>
+</dependency
+```
