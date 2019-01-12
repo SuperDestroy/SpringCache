@@ -10,6 +10,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -26,13 +27,13 @@ public class RedisCacheConfigBean {
 
     /**
      * 使用Jackson 序列化
-     * @param redisConnectionFactory
+     * @param lettuceConnectionFactory
      * @return
      */
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory){
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisTemplate.setConnectionFactory(lettuceConnectionFactory);
         redisTemplate.setKeySerializer(this.jackson2JsonRedisSerializer());
         redisTemplate.setValueSerializer(this.jackson2JsonRedisSerializer());
         redisTemplate.setHashKeySerializer(this.jackson2JsonRedisSerializer());
@@ -42,9 +43,9 @@ public class RedisCacheConfigBean {
     }
 
     @Bean
-    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory){
+    public RedisCacheManager cacheManager(LettuceConnectionFactory lettuceConnectionFactory){
         RedisCacheManager redisCacheManager = new RedisCacheManager(
-                RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory),
+                RedisCacheWriter.nonLockingRedisCacheWriter(lettuceConnectionFactory),
                 this.getRedisCacheConfigurationWidthTTL(Duration.ofSeconds(0L)),
                 new HashMap<String, RedisCacheConfiguration>(){
                     {
